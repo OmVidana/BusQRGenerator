@@ -17,6 +17,12 @@
 		55AED1AC2BFFE1B800026B5E /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55AED1AB2BFFE1B800026B5E /* FirebaseAnalyticsSwift */; };
 		55AED1AE2BFFE1B800026B5E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 55AED1AD2BFFE1B800026B5E /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		55AED1B02BFFE1B800026B5E /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 55AED1AF2BFFE1B800026B5E /* FirebaseAppCheck */; };
+		B49A01DD2C012D2B00ACBD46 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49A01DC2C012D2B00ACBD46 /* LogInView.swift */; };
+		B49A01DF2C012D4000ACBD46 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49A01DE2C012D4000ACBD46 /* RegisterView.swift */; };
+		B49A01E12C012D6B00ACBD46 /* ForgottenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49A01E02C012D6B00ACBD46 /* ForgottenView.swift */; };
+		B49A01E32C012D8A00ACBD46 /* GenerateQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49A01E22C012D8A00ACBD46 /* GenerateQRView.swift */; };
+		B49A01E52C012DB600ACBD46 /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B49A01E42C012DB600ACBD46 /* EditAccountView.swift */; };
+		B49A01E82C012E9500ACBD46 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = B49A01E72C012E9500ACBD46 /* CodeScanner */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,11 @@
 		55AED19A2BFFE05100026B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55AED19D2BFFE05100026B5E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		55AED1A42BFFE10700026B5E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B49A01DC2C012D2B00ACBD46 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		B49A01DE2C012D4000ACBD46 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		B49A01E02C012D6B00ACBD46 /* ForgottenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgottenView.swift; sourceTree = "<group>"; };
+		B49A01E22C012D8A00ACBD46 /* GenerateQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateQRView.swift; sourceTree = "<group>"; };
+		B49A01E42C012DB600ACBD46 /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +46,7 @@
 			files = (
 				55AED1AC2BFFE1B800026B5E /* FirebaseAnalyticsSwift in Frameworks */,
 				55AED1A82BFFE1B800026B5E /* FirebaseAnalytics in Frameworks */,
+				B49A01E82C012E9500ACBD46 /* CodeScanner in Frameworks */,
 				55AED1AA2BFFE1B800026B5E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				55AED1B02BFFE1B800026B5E /* FirebaseAppCheck in Frameworks */,
 				55AED1AE2BFFE1B800026B5E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -65,6 +77,11 @@
 			children = (
 				55AED1962BFFE05000026B5E /* BusQRGeneratorApp.swift */,
 				55AED1982BFFE05000026B5E /* ContentView.swift */,
+				B49A01DC2C012D2B00ACBD46 /* LogInView.swift */,
+				B49A01DE2C012D4000ACBD46 /* RegisterView.swift */,
+				B49A01E02C012D6B00ACBD46 /* ForgottenView.swift */,
+				B49A01E22C012D8A00ACBD46 /* GenerateQRView.swift */,
+				B49A01E42C012DB600ACBD46 /* EditAccountView.swift */,
 				55AED19A2BFFE05100026B5E /* Assets.xcassets */,
 				55AED1A42BFFE10700026B5E /* GoogleService-Info.plist */,
 				55AED19C2BFFE05100026B5E /* Preview Content */,
@@ -102,6 +119,7 @@
 				55AED1AB2BFFE1B800026B5E /* FirebaseAnalyticsSwift */,
 				55AED1AD2BFFE1B800026B5E /* FirebaseAnalyticsWithoutAdIdSupport */,
 				55AED1AF2BFFE1B800026B5E /* FirebaseAppCheck */,
+				B49A01E72C012E9500ACBD46 /* CodeScanner */,
 			);
 			productName = BusQRGenerator;
 			productReference = 55AED1932BFFE05000026B5E /* BusQRGenerator.app */;
@@ -133,6 +151,7 @@
 			mainGroup = 55AED18A2BFFE05000026B5E;
 			packageReferences = (
 				55AED1A62BFFE1B800026B5E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				B49A01E62C012E9500ACBD46 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 55AED1942BFFE05000026B5E /* Products */;
 			projectDirPath = "";
@@ -161,8 +180,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B49A01DD2C012D2B00ACBD46 /* LogInView.swift in Sources */,
+				B49A01DF2C012D4000ACBD46 /* RegisterView.swift in Sources */,
 				55AED1992BFFE05000026B5E /* ContentView.swift in Sources */,
 				55AED1972BFFE05000026B5E /* BusQRGeneratorApp.swift in Sources */,
+				B49A01E32C012D8A00ACBD46 /* GenerateQRView.swift in Sources */,
+				B49A01E52C012DB600ACBD46 /* EditAccountView.swift in Sources */,
+				B49A01E12C012D6B00ACBD46 /* ForgottenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +402,14 @@
 				minimumVersion = 10.26.0;
 			};
 		};
+		B49A01E62C012E9500ACBD46 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -405,6 +437,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 55AED1A62BFFE1B800026B5E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAppCheck;
+		};
+		B49A01E72C012E9500ACBD46 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B49A01E62C012E9500ACBD46 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
