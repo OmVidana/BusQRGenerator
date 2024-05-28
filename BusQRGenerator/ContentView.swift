@@ -8,17 +8,68 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var router = Router.shared
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $router.path) {
+            VStack {
+                Button(action: {
+                    router.path.append(NavigationDestination.login)
+                }) {
+                    Text("Iniciar Sesión")
+                        .font(.title)
+                        .fontWeight(.regular)
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.blue, lineWidth: 2)
+                        )
+                }
+                
+                Button(action: {
+                    router.path.append(NavigationDestination.register)
+                }) {
+                    Text("Crear Cuenta")
+                        .font(.title)
+                        .fontWeight(.regular)
+                        .foregroundColor(.blue)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.blue, lineWidth: 2)
+                        )
+                }
+            }
+            .navigationTitle("Bienvenido")
+            .navigationBarTitleDisplayMode(/*@START_MENU_TOKEN@*/.inline/*@END_MENU_TOKEN@*/)
+            .navigationDestination(for: NavigationDestination.self) { destination in
+                switch destination {
+                case .start:
+                    ContentView()
+                case .login:
+                    LogInView()
+                case .register:
+                    RegisterView()
+                case .generateQR:
+                    GenerateQRView()
+                case .forgottenPassword:
+                    ForgottenView()
+                }
+            }
+            .padding(.horizontal, 48.0)
         }
-        .padding()
     }
 }
+
 
 #Preview {
     ContentView()
 }
+
