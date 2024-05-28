@@ -16,13 +16,15 @@ struct ForgottenView: View {
     @State private var errorMessage = ""
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
+            Spacer()
             Text("Escribe tu Correo y una nueva Contraseña.")
                 .font(.title2)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical)
+            Spacer()
             TextField("Email", text: $email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
@@ -33,7 +35,7 @@ struct ForgottenView: View {
             SecureField("Confirmar Nueva Contraseña", text: $confirmNewPassword)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .textContentType(.password)
-            
+            Spacer()
             Button(action: {
                 resetPassword()
             }) {
@@ -46,10 +48,11 @@ struct ForgottenView: View {
                     .cornerRadius(10)
             }
             .padding(.vertical)
-            
+            Spacer()
             Text(errorMessage)
                 .foregroundColor(.red)
                 .padding(.vertical)
+            Spacer()
         }
         .navigationTitle("Restablecer Contraseña")
         .padding(.horizontal, 48.0)

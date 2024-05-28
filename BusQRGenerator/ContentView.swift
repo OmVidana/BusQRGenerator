@@ -12,7 +12,8 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $router.path) {
-            VStack {
+            VStack(alignment: .center) {
+                Spacer()
                 Button(action: {
                     router.path.append(NavigationDestination.login)
                 }) {
@@ -46,6 +47,7 @@ struct ContentView: View {
                                 .stroke(Color.blue, lineWidth: 2)
                         )
                 }
+                Spacer()
             }
             .navigationTitle("Bienvenido")
             .navigationBarTitleDisplayMode(/*@START_MENU_TOKEN@*/.inline/*@END_MENU_TOKEN@*/)
@@ -57,10 +59,12 @@ struct ContentView: View {
                     LogInView()
                 case .register:
                     RegisterView()
-                case .generateQR:
-                    GenerateQRView()
                 case .forgottenPassword:
                     ForgottenView()
+                case .generateQR:
+                    GenerateQRView()
+                case .editAccount:
+                    EditAccountView()
                 }
             }
             .padding(.horizontal, 48.0)
@@ -72,4 +76,3 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
-

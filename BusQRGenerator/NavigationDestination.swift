@@ -11,6 +11,7 @@ enum NavigationDestination: Hashable {
     case start
     case login
     case register
-    case generateQR
     case forgottenPassword
+    case generateQR
+    case editAccount
 }

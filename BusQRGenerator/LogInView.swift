@@ -15,8 +15,9 @@ struct LogInView: View {
     @State private var errorMsg = ""
     
     var body: some View {
-        VStack {
-            VStack{
+        VStack(alignment: .center) {
+            Spacer()
+            VStack(alignment: .center){
                 TextField("Email", text: $email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 
@@ -24,7 +25,7 @@ struct LogInView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
             .padding(.vertical)
-            VStack{
+            VStack(alignment: .center){
                 Button(action: {
                     login()
                 }) {
@@ -65,6 +66,7 @@ struct LogInView: View {
                 .foregroundColor(.red)
                 .multilineTextAlignment(.center)
                 .padding()
+            Spacer()
         }
         .navigationTitle("Iniciar Sesión")
         .padding(.horizontal, 32.0)

@@ -23,6 +23,7 @@ struct RegisterView: View {
     
     var body: some View {
         VStack(alignment: .center) {
+            Spacer()
             TextField("Nombre", text: $name)
                 .padding()
             
@@ -45,7 +46,7 @@ struct RegisterView: View {
             
             TextField("Semestre", text: $semester)
                 .padding()
-            
+            Spacer()
             Button(action: {
                 register()
             }) {
@@ -62,6 +63,7 @@ struct RegisterView: View {
             Text(errorMessage)
                 .foregroundColor(.red)
                 .padding()
+            Spacer()
         }
         .navigationTitle("Crear Cuenta")
         .padding(.horizontal, 32.0)
