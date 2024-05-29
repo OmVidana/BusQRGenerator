@@ -84,6 +84,7 @@ struct RegisterView: View {
             if let error = error {
                 errorMessage = error.localizedDescription
             } else {
+                
                 saveUserData()
                 router.path.removeLast()
             }
@@ -96,12 +97,11 @@ struct RegisterView: View {
             return
         }
         
-        let userRef = Database.database().reference().child("usuario").child(name)
+        let userRef = Database.database().reference().child("usuario").child(userId)
         let userData: [String: Any] = [
             "apellido": lastName,
             "carrera": career,
             "email": email,
-            "id": userId,
             "nombre": name,
             "semestre": semester
         ]
