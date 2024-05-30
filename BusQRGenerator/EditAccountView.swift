@@ -14,7 +14,10 @@ struct EditAccountView: View {
     @State private var password: String = ""
     @State private var newPassword: String = ""
     @State private var confirmNewPassword: String = ""
-    @State private var userData: [String: Any] = [:]
+    @State private var nombre: String = ""
+    @State private var apellido: String = ""
+    @State private var carrera: String = ""
+    @State private var semestre: String = ""
     @State private var errorMessage = ""
     @State private var successMessage = ""
     
@@ -22,34 +25,46 @@ struct EditAccountView: View {
         VStack {
             Spacer()
             Form {
-                Spacer()
                 Section(header: Text("Password")) {
                     SecureField("Contraseña Actual", text: $password)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5)
                     SecureField("Nueva Contraseña", text: $newPassword)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5)
                     SecureField("Confirmar Nueva Contraseña", text: $confirmNewPassword)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5)
                 }
+                .listRowBackground(Color.white)
                 
                 Section(header: Text("Información de Cuenta")) {
-                    TextField("Nombre", text: Binding(
-                        get: { userData["nombre"] as? String ?? "" },
-                        set: { userData["nombre"] = $0 }
-                    ))
-                    TextField("Apellido", text: Binding(
-                        get: { userData["apellido"] as? String ?? "" },
-                        set: { userData["apellido"] = $0 }
-                    ))
-                    TextField("Carrera", text: Binding(
-                        get: { userData["carrera"] as? String ?? "" },
-                        set: { userData["carrera"] = $0 }
-                    ))
-                    TextField("Semestre", text: Binding(
-                        get: { userData["semestre"] as? String ?? "" },
-                        set: { userData["semestre"] = $0 }
-                    ))
+                    TextField("Nombre", text: $nombre)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5)
+                    TextField("Apellido", text: $apellido)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5)
+                    TextField("Carrera", text: $carrera)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5)
+                    TextField("Semestre", text: $semestre)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5)
                 }
-                Spacer()
+                .listRowBackground(Color.white)
             }
+            .background(Color.white)
+            .cornerRadius(10)
             .scrollContentBackground(.hidden)
+            Spacer()
             Button(action: {
                 updateAccount()
             }) {
@@ -63,7 +78,7 @@ struct EditAccountView: View {
                     .cornerRadius(10)
             }
             .padding(.vertical)
-            Spacer()
+            
             if !errorMessage.isEmpty {
                 Text(errorMessage)
                     .foregroundColor(.red)
@@ -78,6 +93,7 @@ struct EditAccountView: View {
             Spacer()
         }
         .padding(.horizontal, 32.0)
+        .background(Color.white.ignoresSafeArea())
         .onAppear(perform: loadUserData)
         .navigationTitle("Editar Cuenta")
         .navigationBarBackButtonHidden()
@@ -100,7 +116,10 @@ struct EditAccountView: View {
                 errorMessage = "Error al cargar la información de Usuario."
                 return
             }
-            userData = data
+            nombre = data["nombre"] as? String ?? ""
+            apellido = data["apellido"] as? String ?? ""
+            carrera = data["carrera"] as? String ?? ""
+            semestre = data["semestre"] as? String ?? ""
         }
     }
     
@@ -123,22 +142,38 @@ struct EditAccountView: View {
             return
         }
         
-        currentUser.updatePassword(to: newPassword) { error in
+        let credential = EmailAuthProvider.credential(withEmail: currentUser.email!, password: password)
+        currentUser.reauthenticate(with: credential) { result, error in
             if let error = error {
-                errorMessage = error.localizedDescription
-            } else {
-                guard let currentUserID = Auth.auth().currentUser?.uid else {
-                    errorMessage = "Usuario no autenticado."
+                errorMessage = "Error de autenticación: \(error.localizedDescription)"
+                return
+            }
+            
+            currentUser.updatePassword(to: newPassword) { error in
+                if let error = error {
+                    errorMessage = error.localizedDescription
                     return
-                }
-                
-                let ref = Database.database().reference().child("usuario").child(currentUserID)
-                ref.setValue(userData) { error, _ in
-                    if let error = error {
-                        errorMessage = error.localizedDescription
-                    } else {
-                        successMessage = "Cuenta Actualizada exitósamente."
-                        router.path.removeLast()
+                } else {
+                    guard let currentUserID = Auth.auth().currentUser?.uid else {
+                        errorMessage = "Usuario no autenticado."
+                        return
+                    }
+                    
+                    let ref = Database.database().reference().child("usuario").child(currentUserID)
+                    let updatedData: [String: Any] = [
+                        "apellido": apellido,
+                        "carrera": carrera,
+                        "nombre": nombre,
+                        "semestre": semestre
+                    ]
+                    
+                    ref.setValue(updatedData) { error, _ in
+                        if let error = error {
+                            errorMessage = error.localizedDescription
+                        } else {
+                            successMessage = "Cuenta Actualizada exitósamente."
+                            router.path.removeLast()
+                        }
                     }
                 }
             }

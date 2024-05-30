@@ -9,7 +9,6 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseDatabase
 
-
 struct RegisterView: View {
     @StateObject var router = Router.shared
     @State private var name: String = ""
@@ -26,29 +25,45 @@ struct RegisterView: View {
             Spacer()
             TextField("Nombre", text: $name)
                 .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(5)
             
             TextField("Apellido", text: $lastName)
                 .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(5)
             
             TextField("Correo electrónico", text: $email)
                 .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(5)
             
             SecureField("Contraseña", text: $password)
                 .textContentType(.password)
                 .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(5)
             
             SecureField("Confirmar contraseña", text: $confirmPassword)
                 .textContentType(.password)
                 .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(5)
             
             TextField("Carrera", text: $career)
                 .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(5)
             
             TextField("Semestre", text: $semester)
                 .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(5)
             Spacer()
             Button(action: {
-                register()
+                if fieldsAreValid() {
+                    register()
+                }
             }) {
                 Text("Registrarse")
                     .font(.headline)
@@ -69,22 +84,25 @@ struct RegisterView: View {
         .padding(.horizontal, 32.0)
     }
     
-    func register() {
+    func fieldsAreValid() -> Bool {
         guard !name.isEmpty, !lastName.isEmpty, !email.isEmpty, !password.isEmpty, !confirmPassword.isEmpty, !semester.isEmpty, !career.isEmpty else {
             errorMessage = "Por favor completa todos los campos."
-            return
+            return false
         }
         
         guard password == confirmPassword else {
             errorMessage = "Las contraseñas no coinciden."
-            return
+            return false
         }
         
+        return true
+    }
+    
+    func register() {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 errorMessage = error.localizedDescription
             } else {
-                
                 saveUserData()
                 router.path.removeLast()
             }
