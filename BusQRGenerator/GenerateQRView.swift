@@ -16,6 +16,7 @@ struct GenerateQRView: View {
     @State private var qrCode: UIImage?
     @State private var errorMessage = ""
     @State private var showLogoutConfirmation = false
+    @State private var isGenerateButtonEnabled = false
     
     var body: some View {
         VStack(alignment: .center) {
@@ -58,7 +59,7 @@ struct GenerateQRView: View {
                         .cornerRadius(10)
                 }
                 .padding(.vertical)
-                .padding(.vertical)
+                .disabled(!isGenerateButtonEnabled)
                 Spacer()
             }
         }
@@ -117,6 +118,7 @@ struct GenerateQRView: View {
                     }
                 }
             }
+            isGenerateButtonEnabled = true
         }
     }
     
