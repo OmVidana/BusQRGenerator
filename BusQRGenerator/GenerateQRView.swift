@@ -181,14 +181,23 @@ struct GenerateQRView: View {
             }
             
             for child in snapshot.children {
-                if let snapshot = child as? DataSnapshot {
-                    let key = snapshot.key
-                    ref.child(key).child("status").setValue("libre")
-                    ref.child(key).child("user_id").setValue("")
-                    qrCode = nil
-                    return
+                if let snapshot = child as? DataSnapshot,
+                   let keyData = snapshot.value as? [String: Any],
+                   let status = keyData["status"] as? String {
+                    
+                    if status == "ocupado" {
+                        let key = snapshot.key
+                        ref.child(key).child("status").setValue("libre")
+                        ref.child(key).child("user_id").setValue("")
+                        qrCode = nil
+                        return
+                    } else if status == "QR utilizado" {
+                        qrCode = nil
+                        return
+                    }
                 }
             }
+            errorMessage = "No se encontró ningún QR en estado 'ocupado' o 'QR utilizado' asociado a tu usuario."
         }
     }
 }
